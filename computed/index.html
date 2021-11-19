@@ -1,23 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
-</head>
-<body>
-  <div id="root">
-    <h1>hello,{{name}}</h1>
-  </div>
-  <script>
-    const vm = new Vue({
-      el: '#root',
-      data: {
-        name: 'heshimang'
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .lh60 {
+        line-height: 60px;
       }
-    })
-  </script>
-</body>
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h1>hello,{{name}}</h1>
+      <div>
+        <label for="firstName"
+          >姓：
+          <input type="text" name="firstName" :value="firstName" />
+        </label>
+        <label for="lastName"
+          >名：
+          <input type="text" name="lastName" :value="lastName" />
+        </label>
+      </div>
+      <div class="lh60">全名：{{fullName}}</div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          name: "heshimang",
+          firstName: "john",
+          lastName: "smith",
+        },
+        computed: {
+          // 如果仅仅是展示，不涉及到computed的属性的改变，直接写一个function函数即可
+          // fullName() {
+          //   return this.firstName.toUpperCase() + '-' + this.lastName
+          // }
+          // 如果需要改变computed的属性的改变，则应该写getter和setter
+          fullName: {
+            get() {
+              return this.firstName.toUpperCase() + '-' + this.lastName
+            },
+            set(value) {
+              const arr = value.split('-');
+              this.firstName = arr[0].toLowerCase();
+              this.lastName = arr[0];
+            }
+          }
+        },
+      });
+    </script>
+  </body>
 </html>
