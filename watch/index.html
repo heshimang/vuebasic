@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .lh60 {
+        line-height: 60px;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <div>
+        <label for="firstName"
+          >姓：
+          <input type="text" name="firstName" v-model="firstName" />
+        </label>
+        <label for="lastName"
+          >名：
+          <input type="text" name="lastName" v-model="lastName" />
+        </label>
+      </div>
+      <div class="lh60">全名：{{fullName}}</div>
+      <div>
+        <label for="question">输入问题，稍等我会给您回答：
+          <input type="text" name="question" v-model="question" />
+        </label>
+      </div>
+      <div>
+        <label for="deepValue"
+        >递归值：
+        <input type="text" name="deepValue" v-model="deepValue.a" />
+      </label>
+      </div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          firstName: "john",
+          lastName: "smith",
+          fullName: '',
+          question: '',
+          deepValue: {
+            a: 'deepValue'
+          }
+        },
+        watch: {
+          // 此案例实现了computed的功能，但是不同的是，watch可以处理异步操作
+          firstName(val) {
+            setTimeout(() => {
+              this.fullName = val + '-' + this.lastName;
+            }, 1000)
+          },
+          lastName(val) {
+            if(val) {
+              this.fullName = this.firstName + '-' + val;
+            }
+          },
+          deepValue: {
+            deep: true,
+            handler(newVal, oldVal) {
+              console.log('newVal', newVal);
+              console.log('oldVal', oldVal);
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
