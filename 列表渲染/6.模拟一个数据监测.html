@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .lh60 {
+        line-height: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <script>
+      const data = {
+        name: "xiaoming",
+        address: "beijing",
+        obj: {
+          name: 'obj'
+        }
+      };
+
+      // 创建一个监视的实例对象，用来监视data中的属性的变化
+      const _data = new Observer(data);
+      const vm = {
+        _data,
+      };
+
+      function Observer(data) {
+        // 拿到对象的所有的key的集合
+        const keys = Object.keys(data);
+        console.log(keys);
+        keys.forEach((key) => {
+          Object.defineProperty(this, key, {
+            get() {
+              return data[key];
+            },
+            set(newVal) {
+              data[key] = newVal;
+            },
+          });
+        });
+      }
+
+      // // 创建一个监视的实例对象，用于监视data中属性的变化
+      // const _data = new Observer(data);
+      // const vm = {};
+      // vm._data = _data;
+      // console.log('_data', _data);
+      // function Observer(obj) {
+      //   // 汇总对象中所有的属性形成一个数组
+      //   const keys = Object.keys(obj);
+      //   console.log('this', this);
+      //   keys.forEach(key => {
+      //     Object.defineProperty(this, key, {
+      //       get() {
+      //         return obj[key];
+      //       },
+      //       set(val) {
+      //         console.log('obj', obj);
+      //         obj[key] = val;
+      //       }
+      //     })
+      //   })
+      // }
+    </script>
+  </body>
+</html>

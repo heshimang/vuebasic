@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .lh60 {
+        line-height: 60px;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>人员列表</h2>
+      <input type="text" v-model="keyword">
+      <!-- <button @click.once="addPerson">添加</button> -->
+       <!-- 渲染数组 -->
+      <ul>
+        <li v-for="person in filterPersons" :key="person.id">
+          {{person.name}}: {{person.age}}
+        </li>
+      </ul>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          keyword: '',
+          persons: [
+            {id: '001', name: '张云雷', age: 13},
+            {id: '002', name: '李晓雷', age: 20},
+            {id: '004', name: '王云', age: 18},
+            {id: '005', name: '王云虎', age: 28},
+            {id: '006', name: '王天云', age: 8}
+          ],
+          filterPersons: []
+        },
+        watch: {
+          keyword: {
+            immediate: true,
+            handler(newVal) {
+              const filterDatas = this.persons.filter(item => item.name.indexOf(newVal) > -1);
+              this.filterPersons = filterDatas;
+            }
+          }
+          // keyword(newVal) {
+          //   const filterDatas = this.persons.filter(item => item.name.indexOf(newVal) > -1);
+          //   this.filterPersons = filterDatas;
+          // }
+        }
+      });
+    </script>
+  </body>
+</html>
