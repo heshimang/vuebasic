@@ -1,0 +1,40 @@
+<!DOCtype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <title>收集表单数据</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <form>
+        <label for="account">账号：
+          <input id="account" type="text" v-model="account" />
+        </label>
+        <br />
+        <br />
+        <label for="password">密码：
+          <input id="password" type="password" v-model="password" />
+        </label>
+        <br />
+        <br />
+        <label for="">性别：
+          男<input type="radio" value="male" />
+          女<input type="radio" value="smale" />
+        </label>
+        
+      </form>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: '#root',
+        data: {
+          formInfo: {
+            account: '',
+            password: '',
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
