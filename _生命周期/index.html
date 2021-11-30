@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h1 :style="{opacity}">{{name}}</h1>
+      <button @click="stop">点我停止变化</button>
+      <button @click="opacity = 1">透明度设置为1</button>
+    </div>
+    <script> 
+      // 声明周期钩子 beforeCreate, created, beforeMount, mounted, beforeUpdate, updated, beforeDestory, destoryed
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          name: 'hello,world!',
+          opacity: 1,
+          timer: null
+        },
+        watch: {
+          opacity(newVal) {
+            console.log(newVal);
+          }
+        },
+        // template: `<h1 :style="{opacity}">{{name}}</h1>`,
+        beforeCreate() {
+          console.log('beforeCreate');
+          console.log(this);
+          debugger;
+        },
+        created() {
+          console.log('created');
+          console.log(this);
+          debugger;
+        },
+        beforeMount() {
+          console.log('beforeMount');
+          console.log(this);
+          debugger; 
+        },
+        mounted() {
+          console.log('mounted');
+          console.log(this);
+          debugger;
+          this.timer = setInterval(() => {
+            this.opacity -= 0.01; 
+            if(this.opacity < 0) {
+              this.opacity = 1;
+            }
+          }, 16)
+        },
+        // beforeUpdate() {
+        //   console.log('beforeUpdate');
+        //   console.log(this);
+        // },
+        // updated() {
+        //   console.log('updated');
+        //   console.log(this);
+        // },
+        beforeDestroy() { 
+          console.log('beforeDestroy')
+        },
+        destroyed() {
+          console.log('destroyed:vm被销毁了') 
+        },
+        methods: {
+          stop() {
+            clearInterval(this.timer)
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
