@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+      内置指令：v-on, v-bind, v-for, v- if, v-show, v-else
+      v-text, v-h  tml
+      v-html
+      1.作用：用来解析html的字符串
+      2.用信任的来源
+    -->
+    <div id="root">
+      <div>{{name}}</div>
+      <div v-html="htmlStr"></div>
+    </div>
+    <script> 
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          name: 'John',
+          htmlStr: '<p>hello</p>'
+        }
+      });
+    </script>
+  </body>
+</html>

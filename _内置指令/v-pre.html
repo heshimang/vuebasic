@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- 
+      内置指令：v-on, v-bind, v-for, v- if, v-show, v-else
+      v-text, v-html, v-cloak, v-once, v-pre
+      v-pre  跳过这个元素和它的子元素的编译过程。可以用来显示原始 Mustache 标签。跳过大量没有指令的节点会加快编译。
+    -->
+    <div id="root">
+      <div v-pre>年龄：{{age}}</div>
+      <button v-pre @click="ageAdd">+</button>
+    </div>
+    <script> 
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          age: 10,
+        },
+        methods: {
+          ageAdd() {
+            this.age++
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
