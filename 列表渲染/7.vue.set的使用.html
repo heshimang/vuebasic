@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .lh60 {
+        line-height: 60px;
+      }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>投保信息展示</h2>
+      <h2>地址：{{insure.address}}</h2>
+      <h2>姓名：{{insure.name}}</h2>
+      <h2>性别：{{insure.sex}}</h2>
+      <h2>年龄：{{insure.age}}</h2>
+      <h2>朋友</h2>
+      <ul>
+        <li v-for="person in insure.friends" :key="person.id">
+          {{person.name}}: {{person.age}}
+        </li>
+      </ul>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#root",
+        data: {
+          insure: {
+            address: "北京",
+            name: "John",
+            sex: "man",
+            friends: [
+              { id: "001", name: "张云雷", age: 13 },
+              { id: "002", name: "李晓雷", age: 20 },
+              { id: "004", name: "王云", age: 18 },
+              { id: "005", name: "王云虎", age: 28 },
+              { id: "006", name: "王天云", age: 8 },
+            ],
+          },
+        },
+      });
+    
+    </script>
+  </body>
+</html>
