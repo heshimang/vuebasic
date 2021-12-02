@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <Hello></Hello>
+      <School></School>
+      <hr />
+      <Student></Student>
+    </div>
+    <div id="root2">
+      <Hello></Hello>
+    </div>
+    <script>
+      // 创建组件
+      const School = Vue.extend({
+        data() {
+          return {
+            name: "Tangshan Colleage",
+            address: "Tangshan",
+          };
+        },
+        template: `
+          <div>
+            <div>学校姓名：{{name}}</div>
+            <div>学校地址：{{address}}</div>
+            <button @click="showName">点我提示学校名称</button>
+          </div>`,
+        methods: {
+          showName() {
+            alert(this.name);
+          }
+        }
+      });
+      const Student = Vue.extend({
+        data() {
+          return {
+            name: "xiaogang",
+            age: 18,
+          };
+        },
+        template: `
+          <div>
+            <div>学生姓名：{{name}}</div>
+            <div>学生地年龄：{{age}}</div>
+          </div>`,
+      });
+
+      const Hello = Vue.extend({
+        data() {
+          return {
+            name: 'world'
+          }
+        },
+        template: `
+          <h1>hello {{name}}</h1>
+        `
+      })
+
+      // 全局注册组件
+      Vue.component('Hello', Hello);
+
+      // 注册组件
+      const vm = new Vue({
+        el: "#root",
+        // 局部注册
+        components: {
+          School,
+          Student,
+        },
+      });
+
+      const vm2 = new Vue({
+        el: "#root2"
+      });
+      
+    </script>
+  </body>
+</html>
