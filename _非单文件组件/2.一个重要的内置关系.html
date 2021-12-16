@@ -9,13 +9,11 @@
   </head>
   <body>
     <div id="root">
-      <Hello></Hello>
+      <!-- 
+        1.一个重要的内置关系：VueComponent.prototype.__proto__ === Vue.prototype
+        2. 为什么会有这个关系：为了让组件实例对象可以访问到Vue原型上的属性、方法。
+       -->
       <School></School>
-      <hr />
-      <Student></Student>
-    </div>
-    <div id="root2">
-      <Hello></Hello>
     </div>
     <script>
       // 创建组件
@@ -39,47 +37,18 @@
           }
         }
       });
-      const Student = Vue.extend({
-        data() {
-          return {
-            name: "xiaogang", 
-            age: 18,
-          };
-        },
-        template: `
-          <div>
-            <div>学生姓名：{{name}}</div>
-            <div>学生地年龄：{{age}}</div>
-          </div>`,
-      });
-
-      const Hello = Vue.extend({
-        data() {
-          return {
-            name: 'world'
-          }
-        },
-        template: `
-          <h1>hello {{name}}</h1>
-        `
-      })
-
-      // 全局注册组件
-      Vue.component('Hello', Hello);
-
       // 注册组件
       const vm = new Vue({
         el: "#root",
         // 局部注册
-        components: {
-          School,
-          Student,
+        components: { 
+          School
         },
       });
 
-      const vm2 = new Vue({
-        el: "#root2"
-      });
+      console.dir(School);
+      console.log(School.prototype);
+      console.log(School.prototype.__proto__ === Vue.prototype);
       
     </script>
   </body>
